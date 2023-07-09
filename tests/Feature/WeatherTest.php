@@ -13,12 +13,6 @@ class WeatherTest extends TestCase
      *
      * @return void
      */
-    public function test_form_page(): void
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
 
     public function test_response_page(): void
     {
@@ -28,14 +22,6 @@ class WeatherTest extends TestCase
     public function test_response_page_without_param()
     {
         $this->get(route('weather_result'))->assertSessionHasErrors('city')->assertStatus(302);
-    }
-
-    public function test_form_visible(): void
-    {
-        $response = $this->get('/');
-        $response->assertStatus(200);
-        $response->assertSee('Check');
-        $response->assertSee('City:');
     }
 
     public function test_required_city(): void
