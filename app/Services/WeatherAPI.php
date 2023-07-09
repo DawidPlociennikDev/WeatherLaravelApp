@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Services;
+use Illuminate\Support\Facades\Log;
 
 class WeatherAPI
 {
@@ -25,9 +26,11 @@ class WeatherAPI
             if ($response && $status === 200 && $response !== 'null') {
                 return $response;
             }
-            return "Brak danych dla miejscowości '$city'.";
+            Log::error("No data available for localities $city");
+            abort(404);
         } catch (\Exception $e) {
-            echo "Kod błędu: {$e->getCode()}";
+            Log::error($e->getMessage());
+            abort($e->getCode());
         }
     }
 

@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Services\WeatherAPI;
 use Illuminate\Console\Command;
+use stdClass;
 
 class WeatherForCity extends Command
 {
@@ -28,6 +29,18 @@ class WeatherForCity extends Command
      */
     public function handle(WeatherAPI $api)
     {
-        echo $api->getWeather($this->argument('city'));
+        if (!$this->argument('city')) return 0;
+        $weather = json_decode($api->getWeather($this->argument('city')));
+        $currentWeather = $weather->current_condition[0];
+
+        $object = new stdClass;
+        $object->currentTempC = $currentWeather->temp_C;
+        $object->currentTempF = $currentWeather->temp_F;
+        $object->datetime = $currentWeather->localObsDateTime;
+        $object->humidity = $currentWeather->humidity;
+        $object->pressure = $currentWeather->pressure;
+        $object->weatherDesc = $currentWeather->weatherDesc[0]->value;
+
+        echo response()->json($object);
     }
 }

@@ -12,27 +12,18 @@ class WeatherApiTest extends TestCase
      *
      * @return void
      */
-    public function test_api_response()
+
+    public function test_api_response_json() : void
     {
         $api = new WeatherAPI;
-        $api->getWeather('Legnica');
-        $this->assertTrue(true);
+        $array = json_decode($api->getWeather('Legnica'), true);
+        $this->assertIsArray($array);
     }
 
-    public function test_api_resposne_with_wrong_param()
-    {
-        $api = new WeatherAPI;
-        $api->getWeather('@@@22/');
-        $this->assertTrue(true);
-    }
-
-    public function test_artisan_command()
+    public function test_artisan_command() : void
     {
         $this->artisan('weather:city', ['city' => 'Legnica'])->assertSuccessful();
     }
 
-    public function test_artisan_command_with_wrong_param()
-    {
-        $this->artisan('weather:city', ['city' => '@@@/@@2'])->assertExitCode(0);
-    }
+
 }

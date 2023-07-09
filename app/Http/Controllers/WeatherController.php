@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CityRequest;
 use App\Services\WeatherAPI;
+use Illuminate\Contracts\View\View;
+use stdClass;
 
 class WeatherController extends Controller
 {
-    public function weatherForCity(CityRequest $request, WeatherAPI $api)
+    public function weatherResult(CityRequest $request, WeatherAPI $api): View
     {
-        echo $api->getWeather($request->city);
+        $weather = json_decode($api->getWeather($request->city));
+        $currentWeather = $weather->current_condition[0];
+        return view('weather_result', compact(['currentWeather', 'weather']));
     }
 }

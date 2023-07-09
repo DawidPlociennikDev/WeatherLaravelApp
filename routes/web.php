@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('city_form');
 });
 
-Route::get('/pogoda_dla_miasta', [\App\Http\Controllers\WeatherController::class, 'weatherForCity']);
+Route::get('/weather_for_city', [\App\Http\Controllers\WeatherController::class, 'weatherResult'])->name('weather_result');;

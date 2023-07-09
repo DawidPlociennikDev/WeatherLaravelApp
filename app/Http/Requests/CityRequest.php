@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class CityRequest extends FormRequest
 {
-    protected $redirect = '/S';
+    protected $redirect = '/';
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,9 +22,9 @@ class CityRequest extends FormRequest
     public function messages()
     {
         return [
-            'city.required' => 'Miasto jest wymagane',
-            'city.min' => 'Miasto powinno posiadać przynajmniej 3 znaki',
-            'city.alpha' => 'Miasto powinno składać się z samych liter',
+            'city.required' => 'The city is required',
+            'city.min' => 'The city should have at least 3 signs',
+            'city.alpha' => 'The city should consist of the letters themselves',
         ];
     }
 }
