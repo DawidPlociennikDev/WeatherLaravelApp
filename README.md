@@ -15,29 +15,36 @@ Using Laravel 9.x with docker
    ```sh
    composer install
    ```
-4. Copy the example env file and make the required configuration changes in the .env file
+4. Install composer
+   ```sh
+   composer install
+   ```
+5. Copy the example env file and make the required configuration changes in the .env file
    ```sh
    cp .env.example .env 
     ```
-5. Generate a new application key
+6. Generate a new application key
    ```sh
    php artisan key:generate
    ```
-6. Start the local development server
+7. Start the local development server
    ```sh
    php artisan serve
    ```
 ----------
-### Start Weather App with Docker Sail
-1. CURL
+### Start Weather App with Docker
+1. Docker Build
    ```sh
-   curl https://your-domain.com/pogoda_dla_miasta?city={twoje miasto}
+   docker-compose build app
    ```
-2. Artisan
+2. Docker Run
     ```sh
-    php artisan weather:city {twoje miasto}
+    docker-compose up -d
+    ```   
+3. NPM Run
+    ```sh
+    npm run dev
     ```
-    ----------
 ----------
 ### Weather commands for terminal
 1. CURL
