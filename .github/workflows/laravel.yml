@@ -30,7 +30,5 @@ jobs:
       run: docker-compose up -d
     - name: NPM install
       run: npm install
-    - name: NPM run
-      run: npm run dev
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       run: php artisan test
